@@ -32,8 +32,15 @@ jobs:
           api-level: 33
           build-tools: '33.0.2'
 
-      - name: Make gradlew executable
+      - name: Fix line endings
+        run: sed -i 's/\r$//' gradlew
+
+      - name: Grant execute permission
         run: chmod +x gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleDebug
+
 
       - name: Build APK
         working-directory: android
