@@ -1,9 +1,14 @@
 #!/bin/sh
-##############################################################################
-##
-##  Gradle start up script for UN*X
-##
-##############################################################################
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
-exec "$DIR/gradle/wrapper/gradle-wrapper.jar" "$@"
+
+# Find Java
+if [ -n "$JAVA_HOME" ] ; then
+    JAVA_EXE="$JAVA_HOME/bin/java"
+else
+    JAVA_EXE="java"
+fi
+
+exec "$JAVA_EXE" -Xmx64m -Xms64m \
+     -cp "$DIR/gradle/wrapper/gradle-wrapper.jar" \
+     org.gradle.wrapper.GradleWrapperMain "$@"
