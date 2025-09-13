@@ -1,10 +1,15 @@
-@echo off
-set DIR=%~dp0
+@ECHO OFF
+@rem Gradle startup script for Windows
 
-if exist "%JAVA_HOME%\bin\java.exe" (
-  set JAVA_EXE=%JAVA_HOME%\bin\java.exe
-) else (
-  set JAVA_EXE=java
+SET DIR=%~dp0
+SET APP_HOME=%DIR%
+
+SET CLASSPATH=%APP_HOME%\android\gradle\wrapper\gradle-wrapper.jar
+
+IF NOT "%JAVA_HOME%"=="" (
+  SET JAVA_EXE=%JAVA_HOME%\bin\java.exe
+) ELSE (
+  SET JAVA_EXE=java
 )
 
-"%JAVA_EXE%" -Xmx64m -Xms64m -cp "%DIR%gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain %*
+"%JAVA_EXE%" -cp "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
