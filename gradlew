@@ -1,14 +1,22 @@
 #!/bin/sh
+#
+# Gradle start up script for UN*X
+#
 
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+DIRNAME=$(dirname "$0")
+APP_BASE_NAME=$(basename "$0")
+APP_HOME=$(cd "$DIRNAME" && pwd)
 
-# Find Java
+# Add default JVM options here if needed
+DEFAULT_JVM_OPTS=""
+
+CLASSPATH=$APP_HOME/android/gradle/wrapper/gradle-wrapper.jar
+
+# Use JAVA_HOME if set, otherwise use java from PATH
 if [ -n "$JAVA_HOME" ] ; then
-    JAVA_EXE="$JAVA_HOME/bin/java"
+    JAVA_CMD="$JAVA_HOME/bin/java"
 else
-    JAVA_EXE="java"
+    JAVA_CMD="java"
 fi
 
-exec "$JAVA_EXE" -Xmx64m -Xms64m \
-     -cp "$DIR/gradle/wrapper/gradle-wrapper.jar" \
-     org.gradle.wrapper.GradleWrapperMain "$@"
+exec "$JAVA_CMD" $DEFAULT_JVM_OPTS -cp "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
