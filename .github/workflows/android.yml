@@ -33,7 +33,7 @@ jobs:
           build-tools: '33.0.2'
 
       - name: Make gradlew executable
-        run: chmod +x android/gradlew
+        run: chmod +x gradlew
 
       - name: Build APK
         working-directory: android
