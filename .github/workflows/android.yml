@@ -1,45 +1,47 @@
-name: Android CI
+name: Build Android APK
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup JDK 17 (required by AGP 7.x+)
-      - name: Set up JDK 17
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install deps
+        run: npm install
+
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: '17'
+          distribution: 'temurin'
 
-      # Setup Android SDK
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33
+          build-tools: '33.0.2'
 
-      # Make Gradle wrapper executable
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
 
-      # Build Debug APK
-      - name: Build with Gradle
+      - name: Build APK
+        working-directory: android
         run: ./gradlew assembleDebug
 
-      # Upload APK artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug
+          name: app-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           
