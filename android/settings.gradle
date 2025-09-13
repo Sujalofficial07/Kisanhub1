@@ -1,2 +1,3 @@
-rootProject.name = "Kisanhub"
 include ':app'
+rootProject.name = "KisanHub"
+
