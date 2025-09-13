@@ -1,0 +1,53 @@
+name: Build Android APK (init in CI)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dev dependencies
+        run: npm ci
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33
+          build-tools: '33.0.2'
+
+      - name: Create temporary RN CLI project
+        run: |
+          npx react-native@0.72.0 init tempRNProject --version 0.72.0 --directory tempRNProject --skip-install
+          # Copy our app JS into the temp project
+          rsync -a --exclude=node_modules ./ tempRNProject/
+          # install deps inside temp project
+          cd tempRNProject
+          npm install
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug -Pci=true
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: tempRNProject/android/app/build/outputs/apk/debug/app-debug.apk
+          
