@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.kisanhub.R;
 import com.kisanhub.db.DatabaseHelper;
 
@@ -29,7 +26,6 @@ public class AuthActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.password);
         loginBtn = findViewById(R.id.loginBtn);
         signupBtn = findViewById(R.id.signupBtn);
-
         dbHelper = new DatabaseHelper(this);
 
         loginBtn.setOnClickListener(v -> loginUser());
@@ -54,11 +50,10 @@ public class AuthActivity extends AppCompatActivity {
 
         if (c.moveToFirst()) {
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, HomeActivity.class);
-            startActivity(i);
+            startActivity(new Intent(this, HomeActivity.class));
         } else {
             Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
         }
         c.close();
     }
-              }
+}
