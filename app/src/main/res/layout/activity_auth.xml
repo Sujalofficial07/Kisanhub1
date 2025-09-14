@@ -5,28 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/username"
-        android:hint="Username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <EditText android:id="@+id/username" android:hint="Username"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/password"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <EditText android:id="@+id/password" android:hint="Password" android:inputType="textPassword"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:text="Login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <Button android:id="@+id/loginBtn" android:text="Login"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/signupBtn"
-        android:text="Signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <Button android:id="@+id/signupBtn" android:text="Signup"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
 </LinearLayout>
