@@ -9,12 +9,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity android:name=".ui.AuthActivity">
+      <activity
+            android:name=".ui.AuthActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+      </activity>
         <activity android:name=".ui.HomeActivity"/>
         <activity android:name=".ui.ProfileActivity"/>
         <activity android:name=".ui.FarmDetailsActivity"/>
